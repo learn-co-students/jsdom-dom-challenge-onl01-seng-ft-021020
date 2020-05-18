@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let pauseButton = document.getElementById("pause");
     let heartButton = document.getElementById("heart");
     let submitButton = document.getElementById("submit");
+    let likeList = document.querySelector(".likes");
+    let commentList = document.getElementById("list");
     
     minusButton.addEventListener("click", function(event){
         counter.innerText--;
@@ -44,7 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     heartButton.addEventListener("click", function(event){
-        let likeList = document.querySelector("ul.likes");
-        console.log(likeList);
+        let obj = document.getElementById(`${counter.innerText}`);
+        obj ? obj.children[0].innerText++ :
+        likeList.innerHTML += `<li id=${counter.innerText}>${counter.innerText} is liked <span id=${counter.innerText}>1</span> times.</li>`
+    });
+
+    submitButton.addEventListener("click", function(event){
+        event.preventDefault();
+        let comment = document.getElementById("comment-input").value
+        commentList.innerHTML += `<li>${comment}</li>`
+        document.getElementById("comment-form").reset();
     });
 })
